@@ -139,4 +139,5 @@ Siga as instruções para criar um novo repositório no GitHub, conforme imagem 
 
 17. **Entre na sua conta Github, arquivo enviado com sucesso!**<br>
 
+    instalarGit
     <img src="./images/10.png" width="600"><br>
