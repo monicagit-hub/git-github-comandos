@@ -1,28 +1,35 @@
-# Conventional Commits
+# Guia de Commits - Conventional Commits
 
-<br>
+Usar uma convenção clara para mensagens de commit melhora a legibilidade, rastreabilidade e colaboração em equipe. Abaixo estão os tipos mais comuns de commits segundo a convenção **Conventional Commits**:
 
-| Tipo | Descrição                                                                                                                               |
-|-----|----------------------------------------------------------------------------------------------------------------------------------------|
-| feat | Introduz uma nova funcionalidade.                                                                                                               |
-| fix  | Corrige um bug.                                                                                                                              |
-| docs | Alterações na documentação.                                                                                                                  |
-| style | Alterações de estilo (espaçamento, formatação, etc.), sem afetar a funcionalidade.                                                           |
-| refactor | Melhorias no código sem alterar a funcionalidade externa.                                                                                  |
-| test  | Adiciona ou modifica testes.                                                                                                                  |
-| chore | Alterações em arquivos de configuração, ferramentas de build, etc.                                                                           |
+| Tipo      | Descrição                                                                 |
+|-----------|---------------------------------------------------------------------------|
+| 🎉 `feat`     | Adição de um novo recurso ou funcionalidade ao código.                  |
+| 🐛 `fix`      | Correção de bugs.                                                       |
+| 🎨 `style`    | Alterações que não afetam a lógica do código (ex: formatação, espaços). |
+| 🔨 `refactor` | Refatorações que não corrigem bugs nem adicionam funcionalidades.       |
+| ✅ `test`     | Adição ou correção de testes.                                           |
+| 📚 `docs`     | Mudanças apenas na documentação.                                        |
+| 🔧 `chore`    | Atualizações de ferramentas, dependências ou scripts auxiliares.        |
+| ⚡ `perf`     | Melhorias de desempenho.                                                |
+| 🏗️ `build`    | Mudanças no sistema de build ou nas dependências.                      |
+| 🔁 `ci`       | Alterações em scripts de integração contínua.                           |
 
-<br>
+---
 
-## Exemplos  
+## Exemplo de mensagens de commit
 
+- `feat: adicionar botão de login`
+- `fix: corrigir bug no cálculo de desconto`
+- `style: remover espaços em branco`
+- `refactor: simplificar função de validação`
+- `test: adicionar testes para componente Header`
+- `docs: atualizar README com instruções de instalação`
+- `chore: atualizar versão do ESLint`
+- `perf: otimizar carregamento da página inicial`
+- `build: configurar Webpack para produção`
+- `ci: ajustar workflow do GitHub Actions`
 
-| Tipo de Alteração | Exemplo de Comando |
-|---|---|
-| feat (funcionalidade) | git commit -m "feat(user): Adiciona funcionalidade de registro" |
-| fix (correção) | git commit -m "fix(login): Corrige bug de senha em branco" |
-| docs (documentação) | git commit -m "docs(README): Atualiza instruções de uso" |
-| style (estilo) | git commit -m "style(components): Remove comentários desnecessários" |
-| refactor (refatoração) | git commit -m "refactor(utils): Extrai função auxiliar para validação de formulário" |
-| test (teste) | git commit -m "test(user): Adiciona testes para a funcionalidade de registro" |
-| chore (manutenção) | git commit -m "chore(package.json): Atualiza dependências de desenvolvimento" |
+---
+
+🧠 **Dica:** Use sempre o formato `tipo: descrição`, com verbos no infinitivo, curtos e objetivos.
