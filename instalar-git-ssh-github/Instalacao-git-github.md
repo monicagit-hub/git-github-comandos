@@ -1,143 +1,172 @@
+# Instalação do Git e Conexão com GitHub via SSH
+
+Guia passo a passo para instalar o Git, configurar sua identidade e conectar ao GitHub usando chave SSH.
+
+---
+
+## Parte 1 — Instalar e configurar o Git
+
 0. **Abra o terminal**
 <br>
 
-1. Atualize o sistema:<br>
-     `sudo apt update && sudo apt upgrade`   
-2. Instalar o Git:<br>
-     `sudo apt install git`
-3. Confirmar versão do git:<br>
-     `git --version`
-4. Configurar sua identidade do Git (Nome de usuário e e-mail)<br>
-    
-    `git config --global user.name "monicagit-hub"`
-    
-    `git config --global user.email "githubmonica@gmail.com"`
-    
-5. Confirmar a configuração de identidade: <br>
-    `cat .gitconfig`
-    
-6. Crie uma pasta e inicialize um repositório Git:<br>
-    
-    `mkdir NoteOn` (criando uma pasta chamada NoteOn)
-    
-    `cd NoteOn`  (acessa a pasta NoteOn)
-    
-    `git init` (inicializando o git dentro da pasta NoteOn)
-    
-7. Adicione um arquivo à pasta do seu projeto: <br>
-    
-    `touch readme.md` (cria um arquivo chamado readme.md)
-    
-    `ls` (lista tudo que tem dentro da pasta NoteOn)
-    
-    `git status` (Verifica o status dos arquivos)
-    
-8. Enviar esse arquivo para o repositorio git: <br>
-    
+1. Atualize o sistema:
+
+    `sudo apt update && sudo apt upgrade`
+
+2. Instale o Git:
+
+    `sudo apt install git`
+
+3. Confirme a versão instalada:
+
+    `git --version`
+
+4. Configure sua identidade e preferências globais:
+
+    `git config --global user.name "seu-usuario-github"`
+
+    `git config --global user.email "seu@email.com"`
+
+    `git config --global init.defaultBranch main`
+
+5. Confirme as configurações:
+
+    `git config --list`
+
+---
+
+## Parte 2 — Criar um repositório local
+
+6. Crie uma pasta e inicialize um repositório Git:
+
+    `mkdir NomeDoSeuProjeto` &nbsp;&nbsp;(cria a pasta do projeto)
+
+    `cd NomeDoSeuProjeto` &nbsp;&nbsp;(entra na pasta)
+
+    `git init` &nbsp;&nbsp;(inicializa o repositório Git)
+
+7. Adicione um arquivo ao projeto:
+
+    `touch README.md` &nbsp;&nbsp;(cria um arquivo README)
+
+    `ls` &nbsp;&nbsp;(lista o conteúdo da pasta)
+
+    `git status` &nbsp;&nbsp;(verifica o status dos arquivos)
+
+8. Faça o primeiro commit:
+
     `git add .`
-    
-    `git commit -m "readme note on”`
-    
+
+    `git commit -m "feat: primeiro commit"`
+
     <img src="./images/1.png" width="600"><br>
 <br>
-    
-9. **Acesse seu navegador e entre na sua conta do seu github ( [https://github.com](https://github.com/) ), clique no sinal `“ new ”` no canto superior esquerdo.** <br>
-Siga as instruções para criar um novo repositório no GitHub, conforme imagem abaixo:
+
+---
+
+## Parte 3 — Criar o repositório no GitHub
+
+9. **Acesse [github.com](https://github.com), faça login e clique em `New` para criar um novo repositório.**
+Siga as instruções conforme a imagem abaixo:
 <br>
+
     <img src="./images/2.png" width="600"><br>
 <br>
 
-10. **Volte ao seu computador, abra um novo terminal, sem fechar o antigo.**<br>
+---
 
-    `Botão direito do mouse em cima do ícone → nova janela →  abrirá um novo terminal`
+## Parte 4 — Gerar e configurar chave SSH
 
-<br>
+10. Gere uma chave SSH do tipo **Ed25519** (padrão recomendado desde 2022):
 
-11. Nesse novo terminal, gere chaves SSH para enviarmos para a conta do GitHub.<br>
-    **Observação**: dê apenas enter se não quiser adicionar uma senha<br>
+    `ssh-keygen -t ed25519 -C "seu@email.com"`
 
-    `ssh-keygen -t rsa`
-    
-12. Copie o conteúdo da sua chave pública:<br>
+    - Quando perguntar onde salvar, pressione **Enter** para usar o caminho padrão (`~/.ssh/id_ed25519`)
+    - Quando perguntar a senha (passphrase), pressione **Enter** para deixar sem senha, ou digite uma senha se preferir
 
-    `cat ~/.ssh/id_rsa.pub`
+11. Copie o conteúdo da sua chave pública:
 
-13. Volte a sua conta do github acessando: <br>
-    
-    `settings → SSH and GPG keys - new SSH key` <br>
-    
-    Cole a chave no campo **KEY**, conforme imagem abaixo:
-    
+    `cat ~/.ssh/id_ed25519.pub`
+
+12. Volte ao GitHub e adicione a chave em:
+
+    `Settings → SSH and GPG keys → New SSH key`
+
+    Cole a chave no campo **Key**, conforme a imagem abaixo:
+
     <img src="./images/3.png" width="600"><br>
-    
+
 <br>
 
-**Caso tenha adicionado uma senha:**
+---
 
-1. Ao executar o **passo 12**. `cat ~/.ssh/id_rsa.pub` e der essa saída:
+## Parte 4.1 — Se você deu um nome personalizado à chave (opcional)
 
-    ```jsx
-    cat: /home/monicamarcal/.ssh/id_rsa.pub: Arquivo ou diretório inexistente
-    ```
+Se ao executar o passo 10 você digitou um nome (ex: `pink`) em vez de pressionar Enter, o arquivo foi salvo com esse nome na pasta atual. Siga os passos abaixo:
 
-2. Use esse comando para exibir a chave pública e adicionar ao GitHub:
-    
-    **Observação**: É a senha que adicionou ai gerar o  `ssh-keygen -t rsa` <br>
-        Procure por **Your public key has been saved in pink.pub** no meu caso o nome do meu arquivo é **pink.pub**,adicione o seu nome de arquivo no comando abaixo:<br><br>
-        `cat pink.pub`
-    
-     <img src="./images/4.png" width="600"><br>
-    
-3. Copie a chave e cole no github
-4. Mover a chave para o local padrão (opcional):
-    
-    `mkdir -p ~/.ssh`<br>
-    `mv pink ~/.ssh/id_rsa`<br>
-    `mv pink.pub ~/.ssh/id_rsa.pub`<br>
-    `chmod 600 ~/.ssh/id_rsa`<br>
-    `chmod 644 ~/.ssh/id_rsa.pub`<br>
-    
-5.  Adicionar a chave ao SSH Agent (se necessário)<br>
-    Se estiver usando o SSH Agent, carregue a chave com:
+1. Exiba o conteúdo da chave pública gerada:
 
-    `eval "$(ssh-agent -s)”`
+    `cat pink.pub`
 
-    `ssh-add ~/.ssh/id_rsa`
+    <img src="./images/4.png" width="600"><br>
 
-    <img src="./images/5.png" width="600"><br>
-    <br>
-6. Testar a conexão com o github:
-    
-    `ssh -T [git@github.com](mailto:git@github.com)`
-    
+2. Copie a chave e adicione no GitHub (igual ao passo 12 acima).
+
+3. Mova os arquivos para o local padrão do SSH:
+
+    `mkdir -p ~/.ssh`
+
+    `mv pink ~/.ssh/id_ed25519`
+
+    `mv pink.pub ~/.ssh/id_ed25519.pub`
+
+    `chmod 600 ~/.ssh/id_ed25519`
+
+    `chmod 644 ~/.ssh/id_ed25519.pub`
+
+4. Se estiver usando o SSH Agent, carregue a chave:
+
+    `eval "$(ssh-agent -s)"`
+
+    `ssh-add ~/.ssh/id_ed25519`
+
+
+5. Teste a conexão com o GitHub:
+
+    `ssh -T git@github.com`
+
     <img src="./images/6.png" width="600"><br>
-    
-<br><br>
 
-**Retorne ao seu primeiro terminal e vamos  conectar seu repositório local ao repositório remoto**<br>
+<br>
 
-14. Adicione ao comando abaixo seu usuário do github e pasta do projeto:
+---
 
-    `git remote add origin git@github.com:monicagit-hub/NoteOn.git`
+## Parte 5 — Conectar o repositório local ao GitHub
+
+13. Adicione o repositório remoto (substitua `seu-usuario` e `seu-repositorio`):
+
+    `git remote add origin git@github.com:seu-usuario/seu-repositorio.git`
 
     <img src="./images/7.png" width="600"><br>
 
-15. `git remote -v`
-    
-     <img src="./images/8.png" width="600"><br>
-    
-16. Verifique o nome da sua branch:
-    
+14. Confirme o remoto configurado:
+
+    `git remote -v`
+
+    <img src="./images/8.png" width="600"><br>
+
+15. Verifique o nome da sua branch:
+
     `git branch`
-    
-17. Envie as alterações para o repositório GitHub:
-    
-    `git push -u origin master`
-    
-     <img src="./images/9.png" width="600"><br><br><br>
-    
 
-17. **Entre na sua conta Github, arquivo enviado com sucesso!**<br>
+16. Envie as alterações para o GitHub:
 
-    instalarGit
+    `git push -u origin main`
+
+    <img src="./images/9.png" width="600"><br>
+
+<br>
+
+17. **Entre na sua conta do GitHub — arquivo enviado com sucesso!**
+
     <img src="./images/10.png" width="600"><br>
